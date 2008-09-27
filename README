@@ -6,7 +6,9 @@ Some silly stickers you can make out of your Flickr images.
 Description
 -----------
 
-The mainy code resides in an abstract class to handle grabbing photographs from flickr and turning them into somewhat surreal stickers. Any "working" processor should subclass that and implement a #process_each_image method, which should return an array of images ready for writing.
+The main code resides in an abstract class to handle grabbing photographs from flickr and turning them into somewhat surreal stickers. Any "working" processor should subclass that and implement a #process_each_image method, which should return an array of images ready for writing.
+
+Aside from the processing code, the script also contains the code necessary to SFTP the images to a webserver, from where the Moo API can obtain the images and manufacture stickers out of them.
 
 Samples
 -------
@@ -25,7 +27,7 @@ This is a very silly script. What it does, in a nutshell:
 		i) With the background colour set to that average colour
 		ii) And with the title of the photograph overlaid in white text
 
-It generates square images so that you can produce stickers of your photos on MOO.com.
+It generates square images so that you can produce stickers of your photos on moo.com.
 
 You now have stickers that are far higher fidelity than any photograph could be at 300dpi.
 
@@ -47,12 +49,19 @@ Usage
 
 Copy config.yml.sample to config.yml and fill it out with:
 	- your Flickr API key
-	- your MOO API key
-	- FTP details for a server you own.
+	- your Moo API key
+	- SFTP details for a server you own. You'll need:
+	 	- the host (eg: http://www.example.com)
+		- valid username/password for SFTP
+		- the *full* path to where your images should be SFTP'd to, *with trailing slash*
+		- the *full* public facing URL where your images will be visible if successfully copied, *with trailing slash*
+
 	
 then:
 
-ruby name-of-script.rb flickr-short-username limit-number-of-pictures
+ruby name-of-script.rb flickr-short-username limit-number-of-pictures purchase
+
+If you leave off "purchase", the files will simply be uploaded to your web server and you'll be given URLs for them. If you add purchase, a moo.com order for stickers will be created, and you'll be given a URL to view that order.
 
 Requirements
 ------------
@@ -60,6 +69,16 @@ Requirements
 ImageMagick
 RMagick
 Hprciot
+Net::SSH
+
+Ruminant
+	- a gem for Ruby that makes it easy to write to the Moo API. Install it thus:
+	gem sources -a http://gems.github.com
+	
+	and then
+	
+	sudo gem install infovore-ruminant
+
 Flickr API key
 MOO API key
 
