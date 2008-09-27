@@ -20,4 +20,3 @@ if ARGV[0]
 else
   puts "Usage: stripey-photos.rb flickr_user_string limit"
 end
-
