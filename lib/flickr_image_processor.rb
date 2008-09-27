@@ -30,7 +30,7 @@ class FlickrImageProcessor
   end
 end
 
-class StripeyStickers < FlickrImageProcessor
+class StripyStickers < FlickrImageProcessor
   def initialize(*args)
     super
   end
@@ -98,6 +98,5 @@ class DadaistStickers < FlickrImageProcessor
     num_pixels = image.bounding_box.width * image.bounding_box.height
     return {:red => red/num_pixels, :green => green/num_pixels, :blue => blue/num_pixels}  
   end
-  
   
 end
