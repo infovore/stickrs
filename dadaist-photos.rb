@@ -8,6 +8,7 @@ CONFIG = YAML.load_file("config.yml")
 
 if ARGV[0]
   userstring = ARGV[0]
+
   if ARGV[1]
     limit = ARGV[1].to_i
   else
