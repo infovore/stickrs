@@ -53,11 +53,6 @@ class StripeyStickers < FlickrImageProcessor
       output = square_image
       
       {:title => title, :image => output}
-      # this should be done by the main script
-      # 
-      # filename = "stripey-#{title.slugify}.jpg"
-      # output.write(filename)
-      # puts "wrote #{filename}"
     end
   end
 end
@@ -87,11 +82,7 @@ class DadaistStickers < FlickrImageProcessor
 
       output = background.composite(caption[0], Magick::CenterGravity, Magick::OverCompositeOp)
 
-      {"title" => output}
-
-      # output should be written by the handling script.
-      # output.write("avcol-#{title.slugify}.gif")
-      # puts "wrote avcol-#{title.slugify}.gif"
+      {:title => title, :image => output}
     end
   end
   
