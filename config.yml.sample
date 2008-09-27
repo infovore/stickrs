@@ -1,8 +1,12 @@
 flickr_api_key: FLICKR_API_KEY_HERE
 moo_api_key: MOO_API_KEY_HERE
 ftp:
+  host: www.example.com
   username: ftp_username
   password: ftp_password
-  full_upload_path: /path/to/file/location
+  
+  # trailing slashes are CRITICAL in these two.
+  
+  full_upload_path: /path/to/file/location/
   public_url_root: http://public.url/location/
   
