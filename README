@@ -56,7 +56,6 @@ Copy config.yml.sample to config.yml and fill it out with:
 		- the *full* path to where your images should be SFTP'd to, *with trailing slash*
 		- the *full* public facing URL where your images will be visible if successfully copied, *with trailing slash*
 
-	
 then:
 
 ruby name-of-script.rb flickr-short-username limit-number-of-pictures purchase
