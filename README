@@ -63,6 +63,8 @@ ruby name-of-script.rb flickr-short-username limit-number-of-pictures purchase
 
 If you leave off "purchase", the files will simply be uploaded to your web server and you'll be given URLs for them. If you add purchase, a moo.com order for stickers will be created, and you'll be given a URL to view that order.
 
+Alternatively, replacing "purchase" with "preview" will dump the XML for your order out to the command prompt. You can run this through the Moo validator (http://www.moo.com/api/validator.php) to check if things are all coming out OK.
+
 Requirements
 ------------
 
@@ -80,14 +82,8 @@ Ruminant
 	
 	sudo gem install infovore-ruminant
 
-Flickr API key
-MOO API key
-
-Limitations
------------
-
-Currently, it'll only generate square images.
-It doesn't post to the MOO API yet.
+Flickr API key (get one at http://www.flickr.com/services/api/keys/apply/)
+MOO API key (get one at http://www.moo.com/api/key.php)
 
 Authors
 -------
