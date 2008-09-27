@@ -1,0 +1,75 @@
+stickrs
+=======
+
+Some silly stickers you can make out of your Flickr images.
+
+Description
+-----------
+
+The mainy code resides in an abstract class to handle grabbing photographs from flickr and turning them into somewhat surreal stickers. Any "working" processor should subclass that and implement a #process_each_image method, which should return an array of images ready for writing.
+
+Samples
+-------
+
+There are two example scripts here, Both are somewhat surreal.
+
+dadaist-photos.rb
+-----------------
+
+This is a very silly script. What it does, in a nutshell:
+
+1) Gets your n latest photographs from Flickr
+2) For each picture it:
+	a) Calculates the "average" colour of the picture
+	b) Generates a square image
+		i) With the background colour set to that average colour
+		ii) And with the title of the photograph overlaid in white text
+
+It generates square images so that you can produce stickers of your photos on MOO.com.
+
+You now have stickers that are far higher fidelity than any photograph could be at 300dpi.
+
+stripy-photos.rb
+----------------
+
+This is less silly, and perhaps more aesthetically pleasing:
+
+1) Gets your n latest photographs from Flickr
+2) For each picture it:
+	a) Turns it into a 300x300 square
+	b) Takes the central row of pixels in that square
+	c) Replaces every row of pixels in the square with the central row.
+	
+The net result is an often aesthetically pleasing series of stripy squares.
+
+Usage
+-----
+
+Copy config.yml.sample to config.yml and fill it out with:
+	- your Flickr API key
+	- your MOO API key
+	- FTP details for a server you own.
+	
+then:
+
+ruby name-of-script.rb flickr-short-username limit-number-of-pictures
+
+Requirements
+------------
+
+ImageMagick
+RMagick
+Hprciot
+Flickr API key
+MOO API key
+
+Limitations
+-----------
+
+Currently, it'll only generate square images.
+It doesn't post to the MOO API yet.
+
+Authors
+-------
+
+Tom Armitage (tom@infovore.org)
