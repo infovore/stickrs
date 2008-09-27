@@ -50,8 +50,17 @@ if ARGV[0]
     else
       puts "Your order was successfully created. Now visit the website for payment:"
       coder = HTMLEntities.new
-      puts coder.decode(order.start_url) # => "élan"
+      puts coder.decode(order.start_url)
     end
+  elsif ARGV[2].eql?("preview")
+    puts "Previewing your Moo API XML"
+    order = Moo::Order.new(:api_key => CONFIG["moo_api_key"])
+    public_image_urls.each do |url|
+      sticker = Moo::Sticker.new(:url => url)
+      order.designs << sticker
+    end
+    
+    puts order.to_xml
   else
     puts "Your files are available on the web:"
     public_image_urls.each {|url| puts url}
