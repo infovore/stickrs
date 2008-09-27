@@ -1,0 +1,8 @@
+flickr_api_key: FLICKR_API_KEY_HERE
+moo_api_key: MOO_API_KEY_HERE
+ftp:
+  username: ftp_username
+  password: ftp_password
+  full_upload_path: /path/to/file/location
+  public_url_root: http://public.url/location/
+  
