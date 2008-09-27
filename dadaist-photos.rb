@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'yaml'
 require 'net/sftp'
+require 'htmlentities'
+require 'moo'
 require 'lib/core_ext/slugify'
 require 'lib/flickr_image_processor'
 
@@ -34,11 +36,27 @@ if ARGV[0]
   end
   
   if ARGV[2].eql?("purchase")
-    puts "Purchasing these items from MOO.com..."
+    puts "Creating an order for these items from MOO.com..."
+    order = Moo::Order.new(:api_key => CONFIG["moo_api_key"])
+    public_image_urls.each do |url|
+      sticker = Moo::Sticker.new(:url => url)
+      order.designs << sticker
+    end
+    
+    order.submit
+    if order.error?
+      puts "There was a problem with your order:"
+      puts order.error_string
+    else
+      puts "Your order was successfully created. Now visit the website for payment:"
+      coder = HTMLEntities.new
+      puts coder.decode(order.start_url) # => "élan"
+    end
   else
     puts "Your files are available on the web:"
     public_image_urls.each {|url| puts url}
   end
+
 else
   puts "Usage: dadaist-photos.rb flickr_user_string limit"
 end

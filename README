@@ -69,6 +69,7 @@ Requirements
 ImageMagick
 RMagick
 Hprciot
+HTMLEntities
 Net::SSH
 
 Ruminant
