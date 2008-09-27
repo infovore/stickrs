@@ -60,8 +60,8 @@ class DadaistStickers < FlickrImageProcessor
       background = Magick::Image.new(500, 500) { self.background_color = color }
 
       caption = Magick::Image.read("caption:#{title}") do
-        self.size = "288x288"
-        self.pointsize = 25
+        self.size = "480x480"
+        self.pointsize = 45
         self.background_color = "none"
         self.font = "Helvetica Neue Light"
         self.fill = "white"
