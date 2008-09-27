@@ -31,9 +31,9 @@ class FlickrImageProcessor
 end
 
 class StripyStickers < FlickrImageProcessor
-  def initialize(*args)
-    super
-  end
+  # def initialize(*args)
+  #   super
+  # end
   
   def process_each_image
     @pics.map do |title_and_url|
@@ -42,12 +42,12 @@ class StripyStickers < FlickrImageProcessor
 
       image = Image.read(url).first
 
-      square_image = image.resize(300,300)
+      square_image = image.resize(500,500)
 
-      middle_row = square_image.get_pixels(0,150,300,1)
+      middle_row = square_image.get_pixels(0,250,500,1)
 
-      (0..299).each do |n|
-        square_image.store_pixels(0, n, 300, 1, middle_row)
+      (0..499).each do |n|
+        square_image.store_pixels(0, n, 500, 1, middle_row)
       end
 
       output = square_image
@@ -69,7 +69,7 @@ class DadaistStickers < FlickrImageProcessor
 
       color = Pixel.new(avcol[:red], avcol[:green], avcol[:blue])
 
-      background = Magick::Image.new(300, 300) { self.background_color = color }
+      background = Magick::Image.new(500, 500) { self.background_color = color }
 
       caption = Magick::Image.read("caption:#{title}") do
         self.size = "288x288"
