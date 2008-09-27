@@ -9,14 +9,14 @@ require 'lib/flickr_image_processor'
 CONFIG = YAML.load_file("config.yml")
 
 if ARGV[0]
-  userstring = ARGV[0]
+  email = ARGV[0]
   if ARGV[1]
     limit = ARGV[1].to_i
   else
     limit = 90
   end
 
-  stripes_processor = StripyStickers.new(userstring, limit, CONFIG["flickr_api_key"])
+  stripes_processor = StripyStickers.new(email, limit, CONFIG["flickr_api_key"])
   
   processed_images = stripes_processor.process_each_image
   public_image_urls = []
@@ -65,5 +65,5 @@ if ARGV[0]
     public_image_urls.each {|url| puts url}
   end
 else
-  puts "Usage: stripy-photos.rb flickr_user_string limit"
+  puts "Usage: stripy-photos.rb flickr_user_email limit (purchase|preview)"
 end

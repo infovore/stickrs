@@ -1,27 +1,19 @@
 require 'rubygems'
 require 'RMagick'
 require 'open-uri'
-require 'hpricot'
+require 'net/flickr'
 include Magick
 
 class FlickrImageProcessor
-  def initialize(userstring, limit, api_key)
-    # TODO:
-    # next steps:
-    # get by user *name*
-    # get the first *78*
-    # get the *medium* filesize
-
-    user_photos_page = Hpricot(open("http://flickr.com/photos/#{userstring}"))
-    atom_url = user_photos_page.search("head link[@type='application/atom+xml']").first[:href]
-
-    user_atom = Hpricot(open(atom_url))
-
-    pics = user_atom.search("entry").map {|pic| {:title => pic.search("title").inner_html, :url => pic.search("link[@rel='enclosure']").first[:href]}}
-    if limit
-      @pics = pics.slice(0,limit)
-    else
-      @pics = pics
+  def initialize(email, limit, api_key)
+    flickr = Net::Flickr.new(api_key)
+    @pics = []
+    
+    flickr.people.find_by_email(email).photos("per_page" => limit).each do |photo|
+      title = photo.title
+      url = photo.source_url(:medium)
+      
+      @pics << {:title => title, :url => url}
     end
   end
   
@@ -31,10 +23,6 @@ class FlickrImageProcessor
 end
 
 class StripyStickers < FlickrImageProcessor
-  # def initialize(*args)
-  #   super
-  # end
-  
   def process_each_image
     @pics.map do |title_and_url|
       title = title_and_url[:title]

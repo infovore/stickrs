@@ -58,11 +58,17 @@ Copy config.yml.sample to config.yml and fill it out with:
 
 then:
 
-ruby name-of-script.rb flickr-short-username limit-number-of-pictures purchase
+ruby name-of-script.rb flickr-user-email-address limit-number-of-pictures (purchase|preview)
+
+The email address is the email address used by the individual user at Flickr.
+
+The limit should be an integer.
 
 If you leave off "purchase", the files will simply be uploaded to your web server and you'll be given URLs for them. If you add purchase, a moo.com order for stickers will be created, and you'll be given a URL to view that order.
 
 Alternatively, replacing "purchase" with "preview" will dump the XML for your order out to the command prompt. You can run this through the Moo validator (http://www.moo.com/api/validator.php) to check if things are all coming out OK.
+
+stickr uses SFTP. If you already have an SSH key set up on your server, you will be asked for that when the script authorizes against SFTP.
 
 Requirements
 ------------
@@ -70,6 +76,7 @@ Requirements
 ImageMagick
 RMagick
 Hprciot
+Net::Flickr (http://code.google.com/p/net-flickr/ - sudo gem install net-flickr)
 HTMLEntities
 Net::SSH
 

@@ -9,15 +9,14 @@ require 'lib/flickr_image_processor'
 CONFIG = YAML.load_file("config.yml")
 
 if ARGV[0]
-  userstring = ARGV[0]
-
+  email = ARGV[0]
   if ARGV[1]
     limit = ARGV[1].to_i
   else
     limit = 90
   end
 
-  dadaist_processor = DadaistStickers.new(userstring, limit, CONFIG["flickr_api_key"])
+  dadaist_processor = DadaistStickers.new(email, limit, CONFIG["flickr_api_key"])
   
   processed_images = dadaist_processor.process_each_image
   public_image_urls = []
